@@ -1,16 +1,17 @@
 [project]
 authors = ["bitcloud2 <bitcloud22@gmail.com>"]
 channels = ["pytorch", "nvidia", "conda-forge", "https://conda.modular.com/max"]
-description = "Add a short description here"
+description = "Easy installer for using Mochi/Magic with ComfyUI"
 name = "ComfyUI"
 platforms = ["linux-64"]
 version = "0.1.0"
 
 [tasks]
 setup = """
+    bash -c '
     set -e
     sudo apt update && \
-    sudo apt install ffmpeg && \
+    sudo apt install -y ffmpeg && \
     mkdir -p ./custom_nodes && \
     cd ./custom_nodes && \
     git clone https://github.com/kijai/ComfyUI-MochiWrapper && \
@@ -23,6 +24,7 @@ setup = """
     wget https://huggingface.co/Kijai/Mochi_preview_comfy/resolve/main/mochi_preview_dit_fp8_e4m3fn.safetensors -P ./diffusion_models/mochi && \
     wget https://huggingface.co/Kijai/Mochi_preview_comfy/resolve/main/mochi_preview_vae_decoder_bf16.safetensors -P ./vae && \
     wget https://huggingface.co/mcmonkey/google_t5-v1_1-xxl_encoderonly/resolve/main/t5xxl_fp8_e4m3fn.safetensors -P ./clip
+    '
     """
 
 [dependencies]
@@ -49,6 +51,8 @@ ffmpeg = { version = ">=4.4.2,<5", channel = "conda-forge" }
 libjpeg-turbo = ">=2.0.0,<3"
 jpeg = { version = ">=9e,<10a", channel = "conda-forge" }
 setuptools = { version = ">=75.3.0,<76", channel = "conda-forge" }
+websocket-client = ">=1.8.0,<2"
+requests = ">=2.32.3,<3"
 
 [pypi-dependencies]
 torchsde = ">=0.2.6, <0.3"

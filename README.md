@@ -1,3 +1,40 @@
+# Mochi/Magic install notes:
+
+Notes on notes:
+- Ensure you have an NVIDIA driver installed on your machine first.
+- Install the NVIDIA driver with (or whatever driver you want):
+```bash
+sudo apt install -y ubuntu-drivers-common
+sudo apt install -y nvidia-driver-535-server
+```
+- Then reboot system:
+```bash
+sudo reboot
+```
+
+#### Install the ComfyUI Modular environment:
+```bash
+curl -ssL https://magic.modular.com/a505704c-9bba-4eeb-b1f0-e97b1dc69b2f | bash
+source /home/ubuntu/.bashrc
+git clone https://github.com/bitcloud2/ComfyUI.git
+cd ComfyUI
+magic shell
+magic run setup
+```
+
+### Using as an API!!
+
+For using as an API, check out the `custom_api_client.py` for copy/pastecode.
+Example usage:
+```python
+workflow_json = alter_mochi_v1_prompt("steaming burger, grilled patty, melting cheese, lettuce, tomato, red onion, sesame seed bun")
+run_comfyui_workflow(workflow_json)
+
+# If in a Jupyter notebook, you can display the video like this:
+from IPython.display import Video
+Video("output_images/Mochi_preview_00001.mp4", embed=True)
+```
+
 <div align="center">
 
 # ComfyUI
