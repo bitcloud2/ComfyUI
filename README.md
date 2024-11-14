@@ -22,6 +22,11 @@ magic shell
 magic run setup
 ```
 
+#### Run ComfyUI server (supports both browser and API)
+```bash
+python main.py --listen --port 8888
+```
+
 ### Using as an API!!
 
 For using as an API, check out the `custom_api_client.py` for copy/pastecode.
