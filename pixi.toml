@@ -7,6 +7,23 @@ platforms = ["linux-64"]
 version = "0.1.0"
 
 [tasks]
+setup = """
+    set -e
+    sudo apt update && \
+    sudo apt install ffmpeg && \
+    mkdir -p ./custom_nodes && \
+    cd ./custom_nodes && \
+    git clone https://github.com/kijai/ComfyUI-MochiWrapper && \
+    git clone https://github.com/kijai/ComfyUI-KJNodes && \
+    git clone https://github.com/Kosinkadink/ComfyUI-VideoHelperSuite && \
+    cd ../models/ && \
+    mkdir -p ./diffusion_models/mochi && \
+    mkdir -p ./vae && \
+    mkdir -p ./clip && \
+    wget https://huggingface.co/Kijai/Mochi_preview_comfy/resolve/main/mochi_preview_dit_fp8_e4m3fn.safetensors -P ./diffusion_models/mochi && \
+    wget https://huggingface.co/Kijai/Mochi_preview_comfy/resolve/main/mochi_preview_vae_decoder_bf16.safetensors -P ./vae && \
+    wget https://huggingface.co/mcmonkey/google_t5-v1_1-xxl_encoderonly/resolve/main/t5xxl_fp8_e4m3fn.safetensors -P ./clip
+    """
 
 [dependencies]
 python = "==3.11"
